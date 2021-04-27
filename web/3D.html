@@ -5,7 +5,7 @@
 
 <style>
     .sence{
-        width: 400px;height: 400px;margin: 0 auto;transform-style:preserve-3d;
+        width: 800px;height: 800px;margin: 0 auto;transform-style:preserve-3d;
         perspective: 1000px ;position: relative;border: 1px solid #000;
     }
     .box{
@@ -23,6 +23,7 @@
     .item p{
         font: 14px/24px '仿宋';word-break: break-all;
     }
+    
 </style>
 
 </head>
@@ -35,12 +36,14 @@
         var oul=obox.getElementsByTagName("ul")[0];
         var ali=oul.getElementsByTagName("li");
         var theta =Math.PI/(a.length-1);
-        var r=150;
+        var r=200;
+        var angleX=0; var angleY=0;
+
         for(var i=0;i<a.length;i++){
             var phi=2*Math.PI/a[i];
             for(var j=0;j<a[i];j++){
                 var li =document.createElement('li');
-                li.innerHTML='圆';
+                li.innerHTML=' ';
                 drawCircle(li,theta,phi,i,j);
                 oul.appendChild(li);
             }
@@ -56,16 +59,48 @@
             //deg==角度；rad==弧度
         }
 
-        var angleX=0;
-        setInterval(function () {
-            angleX++;
-            obox.style.transform='rotateX('+angleX+'deg) rotateY('+angleX+'deg)';
+
+        //拖拽
+        osence.onmousedown=function(ev){//鼠标点击
+            clearInterval(iTimer1);//清理定时器
+            var e=ev||event;
+            var clickX=e.clientX;
+            var clickY=e.clientY;
+            var disX=0;var disY=0;
+            document.onmousemove=function(ev){
+                var e=ev||event;
+                disX=e.clientX-clickX;
+                disY=e.clientY-clickY;
+                obox.style.transform='rotateX('+(angleX-disY)+'deg) rotateY('+(angleY+disX)+'deg)';
+
+            }
+            document.onmouseup=function(ev){
+                document.onmousemove=null;
+                document.onmouseup=null;
+
+                //重新转动
+                angleX-=disY;
+                angleY+=disX;
+                iTimer1=setInterval(function(){
+                    angleX-=disY/100;
+                    angleY+=disX/100;
+                    obox.style.transform='rotateX('+angleX+'deg) rotateY('+angleY+'deg)';
+                },60)
+            }
+ 
+        }
+
+        //旋转
+        var iTimer1=setInterval(function () {
+            angleY++;
+            obox.style.transform='rotateY('+angleY+'deg)';
             
         },60);
-        
+
+
         function drawCircle(obj,theta,phi,i,j) {
-            obj.circleX=r*Math.sin(theta*i)*Math.sin(phi*j)+200;
-            obj.circleY=r*Math.cos(theta*i)+200;
+            obj.circleX=r*Math.sin(theta*i)*Math.sin(phi*j)+300;
+            obj.circleY=r*Math.cos(theta*i)+300;
             obj.circleZ=r*Math.sin(theta*i)*Math.cos(phi*j);
 
             //使得球面上的文字指向圆心
@@ -76,13 +111,19 @@
         
         
     }
+
+    //学习者点击球面上的点，球面跳转到经验分享者页面
+    function openExp(){
+        window.open("http://www.baidu.com");
+    }
+
 </script>
 
 
 <body>
 <div class="sence" id="sence">
     <div class="box">
-        <ul class="ring">
+        <ul class="ring" onclick="openExp()">
 
         </ul>
 

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css"> 
+	body
+	{
+	font-size:70%;
+	font-family:verdana,helvetica,arial,sans-serif;
+	}
+	
+</style>
+
+<script type="text/javascript"> 
+
+	function cnvs_getCoordinates(e)
+	{
+	var x=e.clientX;
+	var y=e.clientY;
+	document.getElementById("xycoordinates").innerHTML="Coordinates: (" + x + "," + y + ")";
+	}
+
+	function cnvs_clearCoordinates()
+	{
+	document.getElementById("xycoordinates").innerHTML="";
+	}
+	//分享者--添加节点事件
+	function addNode(e){
+		//1.生成节点
+		//1.1选择分类
+
+		/*添加节点图片
+		var im=document.createElement('img');
+		im.src="star.jpeg";
+		im.style.width=50+'px';im.style.height=50+'px';	
+		im.style.left = e.clientX+'px';
+		im.style.top = e.clientY+'px';
+		im.style.position='absolute';//位置一定要改成绝对位置，默认相对位置
+		var showOption = document.getElementById("showOption");
+		showOption.append(im);
+		*/
+
+		var selbox=document.createElement('select');
+		var selGather=new Array("生活-旅游","生活-吃喝","生活-玩乐","学习-竞赛","学习-考试");
+		for(var i=0;i<5;i++)
+		{
+			var myOption=document.createElement('option');
+			myOption.value=i;myOption.text=selGather[i];
+			selbox.add(myOption);
+		}
+		selbox.style.left = e.clientX+'px';
+		selbox.style.top = e.clientY+'px';
+		selbox.style.position='absolute';
+		showOption.append(selbox);
+		//2.
+
+	}
+</script>
+</head>
+
+<body >
+
+<p>在时间轴上添加节点时间</p>
+
+<div id="coordiv" style="float:left;width:1000px;height:10px;border:2px solid #42b89e" 
+onmousemove="cnvs_getCoordinates(event)" onmouseout="" 
+onclick="addNode(event)"></div>
+<div id="showOption"></div>
+
+<div id="xycoordinates"></div>
+ 
+ 
+</body>
+</html>
