@@ -7,7 +7,11 @@
 	font-size:70%;
 	font-family:verdana,helvetica,arial,sans-serif;
 	}
-	
+
+	.select{
+		border-radius: 5px;
+	}
+
 </style>
 
 <script type="text/javascript"> 
@@ -28,7 +32,7 @@
 		//1.生成节点
 		//1.1选择分类
 
-		/*添加节点图片
+		//添加节点图片
 		var im=document.createElement('img');
 		im.src="star.jpeg";
 		im.style.width=50+'px';im.style.height=50+'px';	
@@ -37,8 +41,9 @@
 		im.style.position='absolute';//位置一定要改成绝对位置，默认相对位置
 		var showOption = document.getElementById("showOption");
 		showOption.append(im);
-		*/
+		
 
+		/*
 		var selbox=document.createElement('select');
 		var selGather=new Array("生活-旅游","生活-吃喝","生活-玩乐","学习-竞赛","学习-考试");
 		for(var i=0;i<5;i++)
@@ -51,8 +56,13 @@
 		selbox.style.top = e.clientY+'px';
 		selbox.style.position='absolute';
 		showOption.append(selbox);
-		//2.
+		*/
+		//2.点击坐标之后，在该坐标半径为xx的园上均匀 生成5个小球，每个小球作为一个选项
+		//var selbox=document.createElement('');
 
+	}
+	function GenOption(e){
+		var SelInput=document.createElement('input');
 	}
 </script>
 </head>
@@ -60,11 +70,12 @@
 <body >
 
 <p>在时间轴上添加节点时间</p>
-
-<div id="coordiv" style="float:left;width:1000px;height:10px;border:2px solid #42b89e" 
+<div id="coordiv" style="float:left;width:1200px;height:5px;border:2px solid #42b89e;
+position:absolute;left: 100px;top: 100px;border-radius: 5px;" 
 onmousemove="cnvs_getCoordinates(event)" onmouseout="" 
 onclick="addNode(event)"></div>
 <div id="showOption"></div>
+
 
 <div id="xycoordinates"></div>
  

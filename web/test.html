@@ -1,10 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$(".flip").click(function(){
-$(".panel").slideToggle("slow");
-});
-</script>
+</head>
+
+<body >
+	<p>在时间轴上添加节点时间</p>
+	<div id="timediv" :style="styleObj" :click="addNode"></div>
+	
+	<script src="js/vue.js"></script>
+	<script>
+		var vm_timediv=new Vue({
+			el:"#timediv",
+			data:{
+				//时间主轴 的样式
+				styleObj:{
+					width:"90%",
+					height:"5px",
+					border:"2px solid #42b89e",
+					position:"absolute",
+					left:"100px",
+					top:"100px",
+					borderRadius:"5px",
+				}
+			},
+			method:{
+				//添加事件节点
+				addNode(event){
+					//点击中心坐标
+					/*
+					var x=event.clientX+'px';var y=event.clientY+'px';
+					console.log(event.clientX);
+					//以该点为中心，生成一个圆圈,创建选项
+					var im=document.createElement('img');
+					im.src="star.jpeg";
+					im.style.width=50+'px';im.style.height=50+'px';	
+					im.style.left = x;
+					im.style.top = y;
+					im.style.position='absolute';//位置一定要改成绝对位置，默认相对位置
+					var timediv = document.getElementById("timediv");
+					timediv.append(im);
+					*/
+					console.log(event);
+				}
+
+			}
+		})
+	</script>
+</body>
+</html>
